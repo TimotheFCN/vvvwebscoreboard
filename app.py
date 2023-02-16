@@ -1,4 +1,6 @@
 # Import the necessary modules
+import os
+
 from flask import Flask, render_template
 from flask_socketio import SocketIO, emit
 import pymysql
@@ -10,13 +12,15 @@ import json
 app = Flask(__name__)
 socketio = SocketIO(app)
 
+password = os.environ.get('mysqlpassword')
+
 # Connect to the mariadb database using pymysql
 conn = pymysql.connect(
-    user="root",
-    password="azerty",
-    host="localhost",
+    user="u19105_ZN6GaLQ4XR",
+    password=password,
+    host="45.140.165.82",
     port=3306,
-    database="vvvserver"
+    database="s19105_vvvscoreboard"
 )
 
 # Define a global variable to store the scoreboard data
