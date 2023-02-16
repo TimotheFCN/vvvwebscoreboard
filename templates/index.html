@@ -76,7 +76,7 @@
                     div = document.createElement('div');
                     div.id = player[1];
                     div.className = 'player';
-                    div.innerHTML = `<h3>${player[1]}</h3><img src="https://crafatar.com/avatars/${player[0]}?size=64" onerror="this.src='https://crafatar.com/avatars/8667ba71-b85a-4004-af54-457a9734eed7?size=64';"/><div class="score"><img src="{{url_for('static', filename='trophee.svg')}}"/>${player[2]}</div><div class="beer"><img src="{{url_for('static', filename='beer.svg')}}"/>${player[3]}</div>`;
+                    div.innerHTML = `<h3>${player[1]}</h3><img src="https://crafatar.com/avatars/${player[0]}?size=64" onerror="this.src='https://crafatar.com/avatars/8667ba71-b85a-4004-af54-457a9734eed7?size=64';"/><div class="score"><img src="{{url_for('static', filename='trophee.svg')}}"/>-${player[2]}</div><div class="beer"><img src="{{url_for('static', filename='beer.svg')}}"/>${player[3]}</div>`;
                     document.getElementById('grid').appendChild(div);
                 } else {
                     // otherwise, update the score of the existing div
