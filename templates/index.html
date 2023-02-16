@@ -1,16 +1,56 @@
 <html>
 <head>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #e0e0e0;
+            color: #001f3f;
+        }
+
+        h1 {
+            font-size: 5em;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
         .grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-gap: 10px;
+            grid-template-columns: repeat(5, 1fr);
+            grid-gap: 5vw;
         }
 
         .player {
-            border: 1px solid black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
             padding: 10px;
-            text-align: center;
+
+            border-radius: 10px;
+            background: #e0e0e0;
+            box-shadow:  7px 7px 10px #cccccc, -7px -7px 10px #f4f4f4;
+        }
+
+        .score {
+            display: flex;
+            align-items: center;
+        }
+
+        .beer {
+            display: flex;
+            align-items: center;
+        }
+
+        .beer > img, .score > img {
+            height: 24px;
+            width: 100%;
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.0/socket.io.js"></script>
@@ -36,20 +76,22 @@
                     div = document.createElement('div');
                     div.id = player[1];
                     div.className = 'player';
-                    div.innerHTML = player[1] + '<br>' + player[2] + '<br>' + player[3];
+                    div.innerHTML = `<h3>${player[1]}</h3><img src="https://crafatar.com/avatars/${player[0]}?size=64" onerror="this.src='https://crafatar.com/avatars/8667ba71-b85a-4004-af54-457a9734eed7?size=64';"/><div class="score"><img src="{{url_for('static', filename='trophee.svg')}}"/>${player[2]}</div><div class="beer"><img src="{{url_for('static', filename='beer.svg')}}"/>${player[3]}</div>`;
                     document.getElementById('grid').appendChild(div);
                 } else {
                     // otherwise, update the score of the existing div
-                    div.innerHTML = player[1] + '<br>' + player[2] + '<br>' + player[3];
+                    div.innerHTML = `<h3>${player[1]}</h3><img src="https://crafatar.com/avatars/${player[0]}?size=64" onerror="this.src='https://crafatar.com/avatars/8667ba71-b85a-4004-af54-457a9734eed7?size=64';"/><div class="score"><img src="{{url_for('static', filename='trophee.svg')}}"/>${player[2]}</div><div class="beer"><img src="{{url_for('static', filename='beer.svg')}}"/>${player[3]}</div>`;
                 }
             }
         });
     </script>
 </head>
 <body>
-<h1>Scoreboard</h1>
-<div id="grid" class="grid">
-    <!-- the player divs will be added here dynamically -->
-</div>
+    <div class="container">
+        <h1>SCOREBOARD</h1>
+        <div id="grid" class="grid">
+            <!-- the player divs will be added here dynamically -->
+        </div>
+    </div>
 </body>
 </html>
