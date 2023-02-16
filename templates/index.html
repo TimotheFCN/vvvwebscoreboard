@@ -1,0 +1,55 @@
+<html>
+<head>
+    <style>
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 10px;
+        }
+
+        .player {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.0/socket.io.js"></script>
+    <script>
+        // create a socket connection
+        var socket = io();
+
+        // listen for scoreboard_update event
+        socket.on('scoreboard_update', function (data) {
+            // parse the data as JSON
+            var players = JSON.parse(data);
+
+            // loop through the array of players
+            for (var i = 0; i < players.length; i++) {
+                // get the current player
+                var player = players[i];
+
+                // get the div element with the player's name as id
+                var div = document.getElementById(player[1]);
+
+                // if the div does not exist, create a new one and append it to the grid
+                if (!div) {
+                    div = document.createElement('div');
+                    div.id = player[1];
+                    div.className = 'player';
+                    div.innerHTML = player[1] + '<br>' + player[2] + '<br>' + player[3];
+                    document.getElementById('grid').appendChild(div);
+                } else {
+                    // otherwise, update the score of the existing div
+                    div.innerHTML = player[1] + '<br>' + player[2] + '<br>' + player[3];
+                }
+            }
+        });
+    </script>
+</head>
+<body>
+<h1>Scoreboard</h1>
+<div id="grid" class="grid">
+    <!-- the player divs will be added here dynamically -->
+</div>
+</body>
+</html>
